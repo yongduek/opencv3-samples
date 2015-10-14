@@ -158,7 +158,9 @@ static bool runCalibration( vector<vector<Point2f> > imagePoints,
 
     double rms = calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix,
                     distCoeffs, rvecs, tvecs, 
-                    flags|CALIB_FIX_K4|CALIB_FIX_K5);
+		    // flags );
+		    //| CV_CALIB_RATIONAL_MODEL );//| CALIB_FIX_S1_S2_S3_S4);
+                    flags|CALIB_FIX_K4|CALIB_FIX_K5|CV_CALIB_ZERO_TANGENT_DIST | CV_CALIB_FIX_ASPECT_RATIO | CV_CALIB_ZERO_TANGENT_DIST | CV_CALIB_FIX_K3);
                     ///*|CALIB_FIX_K3*/|CALIB_FIX_K4|CALIB_FIX_K5);
     printf("RMS error reported by calibrateCamera: %g\n", rms);
 
@@ -272,9 +274,9 @@ static bool runAndSave(const string& outputFilename,
                 const vector<vector<Point2f> >& imagePoints,
                 Size imageSize, Size boardSize, Pattern patternType, float squareSize,
                 float aspectRatio, int flags, Mat& cameraMatrix,
-                Mat& distCoeffs, bool writeExtrinsics, bool writePoints )
+                Mat& distCoeffs, vector<Mat>& rvecs, vector<Mat>& tvecs, 
+		bool writeExtrinsics, bool writePoints )
 {
-    vector<Mat> rvecs, tvecs;
     vector<float> reprojErrs;
     double totalAvgErr = 0;
 
@@ -297,12 +299,52 @@ static bool runAndSave(const string& outputFilename,
     return ok;
 }
 
+void pinholeProjectionTest (cv::Mat rview, cv::Mat K, cv::Mat rvec, cv::Mat tvec)
+{
+	cv::Mat_<double> p3d_t = (cv::Mat_<double>(5,3) <<  0,0,0,   5,0,0,    0,5,0,    0,0,5,   5,5,0);
+
+	cv::Mat R;
+	cv::Rodrigues (rvec, R);
+	cerr << "--------------" << endl;
+	cerr << "K: " << K << endl;
+	cerr << "rvec: " << rvec << endl;
+	cerr << "R: " << R << endl;
+	cerr << "tvec: " << tvec << endl;
+	cerr << "p3d_t: " << p3d_t << endl;
+
+	cv::Mat_<double> p2d_t(p3d_t.size());
+
+	cerr << "p2d_t: " << p2d_t << endl;
+
+	for (int i=0; i<p3d_t.rows; i++) {
+		cv::Mat p3 = p3d_t.row(i).t();
+		cerr << "p3=" << p3 << endl;
+		cv::Mat p2 = K * (R*p3 + tvec);
+		p2 /= p2.at<double>(2);
+		cerr << "p2= " << p2 << endl;
+		for (int k=0; k<3; k++) p2d_t(i,k) = p2.at<double>(k,0);
+	}
+	cerr << "p2d_t: " << p2d_t << endl;
+
+	vector<cv::Vec3b> color(5, cv::Vec3b(255,255,255));
+	color[1][0] = color[1][1] = 0; // red
+	color[2][0] = color[2][2] = 0; // green
+	color[3][1] = color[3][2] = 0; // blue
+
+	{
+	   int k;
+	   k=1; cv::line(rview, cv::Point(p2d_t(0,0), p2d_t(0,1)), cv::Point(p2d_t(k,0), p2d_t(k,1)), color[k], 3);
+	   k=2; cv::line(rview, cv::Point(p2d_t(0,0), p2d_t(0,1)), cv::Point(p2d_t(k,0), p2d_t(k,1)), color[k], 3);
+	   k=3; cv::line(rview, cv::Point(p2d_t(0,0), p2d_t(0,1)), cv::Point(p2d_t(k,0), p2d_t(k,1)), color[k], 3);
+	}
+}
 
 int main( int argc, char** argv )
 {
     Size boardSize, imageSize;
     float squareSize = 1.f, aspectRatio = 1.f;
     Mat cameraMatrix, distCoeffs;
+    std::vector<cv::Mat> rvecs, tvecs;
     const char* outputFilename = "out_camera_data.yml";
     const char* inputFilename = 0;
 
@@ -462,7 +504,7 @@ int main( int argc, char** argv )
             if( imagePoints.size() > 0 ) {
                 runAndSave(outputFilename, imagePoints, imageSize,
                            boardSize, pattern, squareSize, aspectRatio,
-                           flags, cameraMatrix, distCoeffs,
+                           flags, cameraMatrix, distCoeffs, rvecs, tvecs,
                            writeExtrinsics, writePoints);
 	    }
             break;
@@ -560,7 +602,7 @@ int main( int argc, char** argv )
 	    cerr << " runAndSave() " << endl;
             if( runAndSave(outputFilename, imagePoints, imageSize,
                        boardSize, pattern, squareSize, aspectRatio,
-                       flags, cameraMatrix, distCoeffs,
+                       flags, cameraMatrix, distCoeffs, rvecs, tvecs,
                        writeExtrinsics, writePoints)) 
 	    {
 		cerr << "Finished Camera Calibration" << endl;
@@ -578,9 +620,24 @@ int main( int argc, char** argv )
     if( !capture.isOpened() && showUndistorted )
     {
         Mat view, rview, map1, map2;
-        initUndistortRectifyMap(cameraMatrix, distCoeffs, Mat(),
-                                getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, 1, imageSize, 0),
-                                imageSize, CV_16SC2, map1, map2);
+
+	cv::Mat newCameraMatrix=getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, /*alpha*/1, imageSize);
+	//cv::Mat newCameraMatrix=getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, /*alpha*/0, imageSize);
+
+// cv::Mat getOptimalNewCameraMatrix();
+// The function computes and returns the optimal new camera matrix based on the free scaling parameter. By varying this parameter, you may retrieve only sensible pixels alpha=0 , keep all the original image pixels if there is valuable information in the corners alpha=1 , or get something in between. When alpha>0 , the undistortion result is likely to have some black pixels corresponding to "virtual" pixels outside of the captured distorted image. The original camera matrix, distortion coefficients, the computed new camera matrix, and newImageSize should be passed to initUndistortRectifyMap to produce the maps for remap .
+//
+
+	//newCameraMatrix = cameraMatrix.clone(); // the same
+
+        initUndistortRectifyMap(cameraMatrix, distCoeffs, Mat() /* R */,
+				newCameraMatrix,
+                                imageSize, /* undistorted image size */
+				CV_16SC2/*format of map1*/, map1, map2 /* outputs */
+				);
+
+	cerr << "Camera Mat: " << cameraMatrix << endl;
+	cerr << "New Cam   : " << newCameraMatrix << endl;
 
         for( i = 0; i < (int)imageList.size(); i++ )
         {
@@ -589,12 +646,20 @@ int main( int argc, char** argv )
                 continue;
             //undistort( view, rview, cameraMatrix, distCoeffs, cameraMatrix );
             remap(view, rview, map1, map2, INTER_LINEAR);
+
+
+	    pinholeProjectionTest (rview, newCameraMatrix, rvecs[i], tvecs[i]);
+
             imshow("Image View", rview);
-            int c = 0xff & waitKey(999);
+            int c = 0xff & waitKey(1999);
             if( (c & 255) == 27 || c == 'q' || c == 'Q' )
                 break;
         }
+	cv::waitKey();
     }
 
     return 0;
 }
+
+
+// eof //
