@@ -189,17 +189,24 @@ StereoCalib(const vector<string>& imagelist, Size boardSize, bool useCalibrated=
     double err = 0;
     int npoints = 0;
     vector<Vec3f> lines[2];
-    for( i = 0; i < nimages; i++ )
+    for( i = 0; i < nimages; i++ ) // for each image
     {
         int npt = (int)imagePoints[0][i].size();
         Mat imgpt[2];
-        for( k = 0; k < 2; k++ )
+        for( k = 0; k < 2; k++ ) // left and right images
         {
             imgpt[k] = Mat(imagePoints[k][i]);
             undistortPoints(imgpt[k], imgpt[k], cameraMatrix[k], distCoeffs[k], Mat(), cameraMatrix[k]);
-            computeCorrespondEpilines(imgpt[k], k+1, F, lines[k]);
+            //
+            // l2 = F * p1
+            // l2 = (a,b,c) is normalized so that a^2+b^2=1
+            //
+            computeCorrespondEpilines(imgpt[k] /* vector<Point2f> */, 
+                                        k+1 /* 1 or 2 */, 
+                                        F, 
+                                        lines[k]);
         }
-        for( j = 0; j < npt; j++ )
+        for( j = 0; j < npt; j++ ) // epipolar distance
         {
             double errij = fabs(imagePoints[0][i][j].x*lines[1][j][0] +
                                 imagePoints[0][i][j].y*lines[1][j][1] + lines[1][j][2]) +
@@ -225,10 +232,15 @@ StereoCalib(const vector<string>& imagelist, Size boardSize, bool useCalibrated=
     Mat R1, R2, P1, P2, Q;
     Rect validRoi[2];
 
+    //
+    // Computes rectification transforms for each head of a calibrated stereo camera.
+    //
     stereoRectify(cameraMatrix[0], distCoeffs[0],
                   cameraMatrix[1], distCoeffs[1],
                   imageSize, R, T, R1, R2, P1, P2, Q,
-                  CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
+                  CALIB_ZERO_DISPARITY, 
+                  1, // all the pixels from the original images from the cameras are retained in the rectified images. 
+                  imageSize, &validRoi[0], &validRoi[1]);
 
     fs.open("extrinsics.yml", FileStorage::WRITE);
     if( fs.isOpened() )
