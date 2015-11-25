@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B00C7F931C04571B008F07CE /* matchmethod_orb_akaze_brisk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B00C7F921C04571B008F07CE /* matchmethod_orb_akaze_brisk.cpp */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B00C7F7B1C045605008F07CE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		B00C7F891C045621008F07CE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B00C7F7D1C045605008F07CE /* opencv-samples-run */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "opencv-samples-run"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00C7F8B1C045621008F07CE /* matching-AKAZE */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "matching-AKAZE"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00C7F921C04571B008F07CE /* matchmethod_orb_akaze_brisk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matchmethod_orb_akaze_brisk.cpp; path = ../../../cpp/matchmethod_orb_akaze_brisk.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B00C7F7A1C045605008F07CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B00C7F881C045621008F07CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B00C7F741C045605008F07CE = {
+			isa = PBXGroup;
+			children = (
+				B00C7F7F1C045605008F07CE /* opencv-samples-run */,
+				B00C7F7E1C045605008F07CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B00C7F7E1C045605008F07CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B00C7F7D1C045605008F07CE /* opencv-samples-run */,
+				B00C7F8B1C045621008F07CE /* matching-AKAZE */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B00C7F7F1C045605008F07CE /* opencv-samples-run */ = {
+			isa = PBXGroup;
+			children = (
+				B00C7F921C04571B008F07CE /* matchmethod_orb_akaze_brisk.cpp */,
+			);
+			path = "opencv-samples-run";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B00C7F7C1C045605008F07CE /* opencv-samples-run */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B00C7F841C045605008F07CE /* Build configuration list for PBXNativeTarget "opencv-samples-run" */;
+			buildPhases = (
+				B00C7F791C045605008F07CE /* Sources */,
+				B00C7F7A1C045605008F07CE /* Frameworks */,
+				B00C7F7B1C045605008F07CE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "opencv-samples-run";
+			productName = "opencv-samples-run";
+			productReference = B00C7F7D1C045605008F07CE /* opencv-samples-run */;
+			productType = "com.apple.product-type.tool";
+		};
+		B00C7F8A1C045621008F07CE /* matching-AKAZE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B00C7F8F1C045621008F07CE /* Build configuration list for PBXNativeTarget "matching-AKAZE" */;
+			buildPhases = (
+				B00C7F871C045621008F07CE /* Sources */,
+				B00C7F881C045621008F07CE /* Frameworks */,
+				B00C7F891C045621008F07CE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "matching-AKAZE";
+			productName = "matching-AKAZE";
+			productReference = B00C7F8B1C045621008F07CE /* matching-AKAZE */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B00C7F751C045605008F07CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Yongduek Seo";
+				TargetAttributes = {
+					B00C7F7C1C045605008F07CE = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					B00C7F8A1C045621008F07CE = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = B00C7F781C045605008F07CE /* Build configuration list for PBXProject "opencv-samples-run" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B00C7F741C045605008F07CE;
+			productRefGroup = B00C7F7E1C045605008F07CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B00C7F7C1C045605008F07CE /* opencv-samples-run */,
+				B00C7F8A1C045621008F07CE /* matching-AKAZE */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B00C7F791C045605008F07CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00C7F931C04571B008F07CE /* matchmethod_orb_akaze_brisk.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B00C7F871C045621008F07CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B00C7F821C045605008F07CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/ocv3/include/opencv,
+					/usr/local/ocv3/include,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-L/usr/local/ocv3/lib",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_objdetect",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_imgcodecs",
+					"-lopencv_video",
+					"-lopencv_photo",
+					"-lopencv_ml",
+					"-lopencv_imgproc",
+					"-lopencv_flann",
+					"-lopencv_core",
+					"-lopencv_hal",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B00C7F831C045605008F07CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/ocv3/include/opencv,
+					/usr/local/ocv3/include,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-L/usr/local/ocv3/lib",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_objdetect",
+					"-lopencv_superres",
+					"-lopencv_videostab",
+					"-lopencv_calib3d",
+					"-lopencv_features2d",
+					"-lopencv_highgui",
+					"-lopencv_videoio",
+					"-lopencv_imgcodecs",
+					"-lopencv_video",
+					"-lopencv_photo",
+					"-lopencv_ml",
+					"-lopencv_imgproc",
+					"-lopencv_flann",
+					"-lopencv_core",
+					"-lopencv_hal",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B00C7F851C045605008F07CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B00C7F861C045605008F07CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B00C7F901C045621008F07CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B00C7F911C045621008F07CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B00C7F781C045605008F07CE /* Build configuration list for PBXProject "opencv-samples-run" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00C7F821C045605008F07CE /* Debug */,
+				B00C7F831C045605008F07CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B00C7F841C045605008F07CE /* Build configuration list for PBXNativeTarget "opencv-samples-run" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00C7F851C045605008F07CE /* Debug */,
+				B00C7F861C045605008F07CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B00C7F8F1C045621008F07CE /* Build configuration list for PBXNativeTarget "matching-AKAZE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00C7F901C045621008F07CE /* Debug */,
+				B00C7F911C045621008F07CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B00C7F751C045605008F07CE /* Project object */;
+}
